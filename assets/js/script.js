@@ -18,7 +18,40 @@ $(document).ready(function () {
                         <h3>${nombre}</h3>
                         <img src="${imagen}">
                         <h6>Peso: ${peso}</h6>
-                     </div>`)
+                     </div>`);
+
+                    let estadisticas = []
+
+                    data.stats.forEach(function(s){
+                        estadisticas.push({
+                            label: s.stat.name,
+                            y: s.base_stat,
+                        });
+                    });
+
+                     let config = {
+                        animationEnabled: true,
+                        title: {
+                            text: "Estadisticas"
+                        },
+                        axisY: {
+                            title: "Valor"
+                        },
+                        axisX: {
+                            title: "Estadictica"
+                        },
+                        data:[
+                            {
+                                type: "column",
+                                dataPoints: estadisticas,
+                            },
+                        ],
+                     };
+
+                     let chart = new CanvasJS.Chart("pokeStats", config);
+
+                     chart.render();
+
             },
         });
     });
